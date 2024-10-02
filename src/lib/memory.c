@@ -1,7 +1,13 @@
 #include "memory.h"
 #include <stdio.h>
+#include <stdlib.h>
 
-// 分配内存，如果失败则打印错误并退出
+/**
+ * @brief 安全地分配内存，如果失败则退出程序
+ *
+ * @param size 要分配的字节数
+ * @return void* 分配的内存指针
+ */
 void *xmalloc(size_t size)
 {
     void *ptr = malloc(size);
@@ -13,7 +19,13 @@ void *xmalloc(size_t size)
     return ptr;
 }
 
-// 分配初始化为零的内存
+/**
+ * @brief 安全地分配初始化为零的内存，如果失败则退出程序
+ *
+ * @param nmemb 元素数量
+ * @param size 每个元素的大小
+ * @return void* 分配的内存指针
+ */
 void *xcalloc(size_t nmemb, size_t size)
 {
     void *ptr = calloc(nmemb, size);
@@ -25,7 +37,13 @@ void *xcalloc(size_t nmemb, size_t size)
     return ptr;
 }
 
-// 重新分配内存
+/**
+ * @brief 安全地重新分配内存，如果失败则退出程序
+ *
+ * @param ptr 原内存指针
+ * @param size 新的大小
+ * @return void* 新的内存指针
+ */
 void *xrealloc(void *ptr, size_t size)
 {
     ptr = realloc(ptr, size);
@@ -37,7 +55,11 @@ void *xrealloc(void *ptr, size_t size)
     return ptr;
 }
 
-// 释放内存
+/**
+ * @brief 释放内存指针
+ *
+ * @param ptr 要释放的内存指针
+ */
 void xfree(void *ptr)
 {
     if (ptr)
