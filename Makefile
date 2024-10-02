@@ -1,19 +1,27 @@
-# Makefile
-CC = g++
-CFLAGS = -std=c++11 -Iinclude -pthread
+CC = gcc
+CFLAGS = -Wall -g
+LDFLAGS = -lpthread
 
-SRC = src/main.cpp src/gbr_daemon.cpp src/gbr_protocol.cpp src/vty_server.cpp src/config_manager.cpp
-OBJ = $(SRC:.cpp=.o)
+LIB_SRCS = $(wildcard src/lib/*.c)
+OSPF_SRCS = $(wildcard src/ospf/*.c)
+TEST_SRCS = $(wildcard tests/*.c)
 
-TARGET = gbr_daemon
+LIB_OBJS = $(LIB_SRCS:.c=.o)
+OSPF_OBJS = $(OSPF_SRCS:.c=.o)
+TEST_OBJS = $(TEST_SRCS:.c=.o)
 
-all: $(TARGET)
+INCLUDES = -Iinclude
 
-$(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^
+all: ospf_d
 
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+ospf_d: $(LIB_OBJS) $(OSPF_OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+tests: $(LIB_OBJS) $(OSPF_OBJS) $(TEST_OBJS)
+	$(CC) $(CFLAGS) -o test_ospf $^ $(LDFLAGS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -f ospf_d test_ospf $(LIB_OBJS) $(OSPF_OBJS) $(TEST_OBJS)

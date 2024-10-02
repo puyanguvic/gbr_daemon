@@ -66,3 +66,29 @@ ospf_d/
 ├── Makefile                      # Build and compilation instructions
 ├── README.md                     # Documentation and usage instructions
 └── LICENSE                       # License for the project
+
+
+
+# ospf_d
+
+这是一个基于 C 语言开发的 OSPF（开放最短路径优先）守护进程。
+
+## 特性
+
+- 支持基本的 OSPFv2 功能
+- 支持邻居发现和维护
+- 实现 SPF 算法构建路由表
+- 可通过配置文件进行定制
+
+## 编译和运行
+
+### 环境依赖
+
+- GCC 编译器
+- Make 工具
+- Linux 操作系统
+
+### 编译
+
+```sh
+make

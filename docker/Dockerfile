@@ -1,17 +1,23 @@
-# 使用ubuntu 22.04作为基础镜像
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 
-# 更新包列表并安装编译器g++和make
-RUN apt update && apt install -y g++ make && apt clean
+# 设置非交互式安装
+ENV DEBIAN_FRONTEND=noninteractive
 
-# 将源代码复制到容器中
-COPY . /gbr_daemon
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpthread-stubs0-dev \
+    net-tools \
+    iproute2
 
-# 设置工作目录
-WORKDIR /gbr_daemon
+# 复制项目文件
+COPY . /ospf_d
+WORKDIR /ospf_d
 
 # 编译项目
 RUN make
 
-# 运行GBR守护进程
-CMD ["./gbr_daemon"]
+# 暴露必要的端口（如果需要）
+EXPOSE 2604
+
+# 设置入口点
+ENTRYPOINT ["./ospf_d", "-c", "config/ospf_d.conf"]
