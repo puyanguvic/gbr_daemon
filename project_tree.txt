@@ -1,0 +1,129 @@
+ospf_d/
+├── CMakeLists.txt               # 顶层 CMake 配置文件
+├── src/
+│   ├── main.c                   # 主程序入口
+│   ├── CMakeLists.txt           # src 目录的 CMake 配置
+│   ├── lib/                     # 公共库代码
+│   │   ├── CMakeLists.txt
+│   │   ├── buffer.c
+│   │   ├── buffer.h
+│   │   ├── command.c
+│   │   ├── command.h
+│   │   ├── kernel_route.c
+│   │   ├── kernel_route.h
+│   │   ├── log.c
+│   │   ├── log.h
+│   │   ├── memory.c
+│   │   ├── memory.h
+│   │   ├── network.c
+│   │   ├── network.h
+│   │   ├── prefix.c
+│   │   ├── prefix.h
+│   │   ├── thread.c
+│   │   └── thread.h
+│   └── ospf/                    # OSPF 守护进程代码
+│       ├── CMakeLists.txt
+│       ├── core/
+│       │   ├── ospf_main.c
+│       │   ├── ospf_main.h
+│       │   ├── ospf_config.c
+│       │   └── ospf_config.h
+│       ├── routing/
+│       │   ├── ospf_ase.c
+│       │   ├── ospf_ase.h
+│       │   ├── ospf_route.c
+│       │   ├── ospf_route.h
+│       │   ├── ospf_spf.c
+│       │   └── ospf_spf.h
+│       ├── packet/
+│       │   ├── ospf_lsa.c
+│       │   ├── ospf_lsa.h
+│       │   ├── ospf_packet.c
+│       │   └── ospf_packet.h
+│       ├── neighbor/
+│       │   ├── ospf_interface.c
+│       │   ├── ospf_interface.h
+│       │   ├── ospf_neighbor.c
+│       │   └── ospf_neighbor.h
+│       ├── area/
+│       │   ├── ospf_area.c
+│       │   ├── ospf_area.h
+│       │   ├── ospf_network.c
+│       │   └── ospf_network.h
+│       ├── flood/
+│       │   ├── ospf_flood.c
+│       │   └── ospf_flood.h
+│       └── utils/
+│           ├── ospf_debug.c
+│           ├── ospf_debug.h
+│           ├── ospf_snmp.c
+│           ├── ospf_snmp.h
+│           ├── ospf_utils.c
+│           └── ospf_utils.h
+├── tests/
+│   ├── CMakeLists.txt           # tests 目录的 CMake 配置
+│   ├── unit/                    # 单元测试
+│   │   ├── CMakeLists.txt
+│   │   ├── lib/
+│   │   │   ├── CMakeLists.txt
+│   │   │   ├── test_buffer.c
+│   │   │   ├── test_command.c
+│   │   │   ├── test_kernel_route.c
+│   │   │   ├── test_log.c
+│   │   │   ├── test_memory.c
+│   │   │   ├── test_network.c
+│   │   │   ├── test_prefix.c
+│   │   │   └── test_thread.c
+│   │   └── ospf/
+│   │       ├── CMakeLists.txt
+│   │       ├── core/
+│   │       │   ├── test_ospf_config.c
+│   │       │   └── test_ospf_main.c
+│   │       ├── routing/
+│   │       │   ├── test_ospf_ase.c
+│   │       │   ├── test_ospf_route.c
+│   │       │   └── test_ospf_spf.c
+│   │       ├── packet/
+│   │       │   ├── test_ospf_lsa.c
+│   │       │   └── test_ospf_packet.c
+│   │       ├── neighbor/
+│   │       │   ├── test_ospf_interface.c
+│   │       │   └── test_ospf_neighbor.c
+│   │       ├── area/
+│   │       │   ├── test_ospf_area.c
+│   │       │   └── test_ospf_network.c
+│   │       ├── flood/
+│   │       │   └── test_ospf_flood.c
+│   │       └── utils/
+│   │           ├── test_ospf_debug.c
+│   │           ├── test_ospf_snmp.c
+│   │           └── test_ospf_utils.c
+│   └── integration/             # 集成测试
+│       ├── functional/
+│       │   ├── test_basic_connectivity.sh
+│       │   ├── test_lsa_exchange.sh
+│       │   └── test_route_installation.sh
+│       ├── robustness/
+│       │   ├── test_link_flap.sh
+│       │   └── test_rapid_convergence.sh
+│       └── stress/
+│           ├── test_high_load.sh
+│           └── test_large_topology.sh
+├── docs/                        # 文档
+│   ├── architecture.md
+│   ├── configuration.md
+│   ├── development.md
+│   └── troubleshooting.md
+├── scripts/                     # 脚本
+│   ├── setup_network.sh
+│   ├── test_ospf.sh
+│   └── validate_config.sh
+├── config/                      # 配置文件
+│   └── ospf_d.conf.sample
+├── docker/                      # Docker 相关
+│   ├── Dockerfile
+│   ├── entrypoint.sh
+│   └── ospf_d.conf
+├── LICENSE                      # 许可证
+├── README.md                    # 项目简介
+└── .gitignore                   # Git 忽略文件
