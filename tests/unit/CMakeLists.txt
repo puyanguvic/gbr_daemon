@@ -1,1 +1,3 @@
-# TODO: 配置单元测试的构建设置
+# 添加子目录
+add_subdirectory(lib)
+add_subdirectory(ospf)
