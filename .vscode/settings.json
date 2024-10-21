@@ -2,6 +2,8 @@
     "files.associations": {
         "memory.h": "c",
         "ospf_packet.h": "c",
-        "inet.h": "c"
+        "inet.h": "c",
+        "ospf_lsa.h": "c",
+        "string.h": "c"
     }
 }

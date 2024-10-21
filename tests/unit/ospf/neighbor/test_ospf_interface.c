@@ -1,4 +1,4 @@
-#include "ospf_interface.h"
+#include "ospf/neighbor/ospf_interface.h"
 #include <stdio.h>
 
 int main(void)
