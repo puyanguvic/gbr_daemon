@@ -29,8 +29,6 @@ ospf_d/
 │       │   ├── ospf_config.c
 │       │   └── ospf_config.h
 │       ├── routing/
-│       │   ├── ospf_ase.c
-│       │   ├── ospf_ase.h
 │       │   ├── ospf_route.c
 │       │   ├── ospf_route.h
 │       │   ├── ospf_spf.c
@@ -80,7 +78,6 @@ ospf_d/
 │   │       │   ├── test_ospf_config.c
 │   │       │   └── test_ospf_main.c
 │   │       ├── routing/
-│   │       │   ├── test_ospf_ase.c
 │   │       │   ├── test_ospf_route.c
 │   │       │   └── test_ospf_spf.c
 │   │       ├── packet/

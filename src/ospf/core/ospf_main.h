@@ -1,100 +1,61 @@
-/* ospf_main.c */
-#include "ospf_main.h"
-#include "ospf_config.h"
-#include "ospf_route.h"
-#include <stdio.h>
+/*
+ * OSPF Daemon - Main Header
+ *
+ * (c) 2024 Pu Yang <email@example.com>
+ *
+ * This program is distributed under the terms of the GNU General Public License.
+ */
 
-void ospf_init()
-{
-    printf("Initializing OSPF Daemon...\n");
-    ospf_config_load();
-    ospf_route_init();
-}
+/**
+ * DOC: OSPF Daemon Main Header
+ *
+ * This header defines the primary entry points for the OSPF daemon,
+ * including functions for initialization, the main event loop, and shutdown.
+ * It also integrates various OSPF modules for routing, neighbor management,
+ * and link-state advertisement processing.
+ */
 
-int main(int argc, char **argv)
-{
-    printf("OSPF Daemon Starting...\n");
-    ospf_init();
-    // Add event loop or main process logic here
-    return 0;
-}
+#ifndef OSPF_MAIN_H
+#define OSPF_MAIN_H
 
-/* ospf_config.c */
-#include "ospf_config.h"
-#include <stdio.h>
+// Include configuration and subsystem modules
+#include "../ospf/core/ospf_config.h"
+#include "../ospf/routing/ospf_route.h"
+#include "../ospf/neighbor/ospf_neighbor.h"
+#include "../ospf/packet/ospf_lsa.h"
+#include "../ospf/area/ospf_area.h"
+#include "../ospf/flood/ospf_flood.h"
+#include "../ospf/routing/ospf_spf.h"
 
-void ospf_config_load()
-{
-    printf("Loading OSPF Configuration...\n");
-    // TODO: Load OSPF configuration from file or arguments
-}
+// Global configuration structure
+extern ospf_config_t ospf_config;
 
-/* ospf_route.c */
-#include "ospf_route.h"
-#include "ospf_spf.h"
-#include <stdio.h>
+/* Function Prototypes */
 
-void ospf_route_init()
-{
-    printf("Initializing OSPF Routing Module...\n");
-    ospf_spf_init();
-}
+/**
+ * ospf_init - Initializes the OSPF daemon with a specified configuration file.
+ * @config_file: Path to the configuration file containing OSPF settings.
+ *
+ * Loads configuration settings, initializes key OSPF data structures, and
+ * prepares the daemon for protocol operation.
+ */
+void ospf_init(const char *config_file);
 
-/* ospf_spf.c */
-#include "ospf_spf.h"
-#include <stdio.h>
+/**
+ * ospf_main_loop - Main event loop for the OSPF daemon.
+ *
+ * Continuously polls for incoming OSPF events and performs periodic tasks,
+ * such as sending hello packets, updating routing tables, and flooding LSAs.
+ * The loop continues until a termination signal is received.
+ */
+void ospf_main_loop();
 
-void ospf_spf_init()
-{
-    printf("Initializing Shortest Path First (SPF) Algorithm...\n");
-    // TODO: Implement SPF calculation initialization
-}
+/**
+ * ospf_shutdown - Shuts down the OSPF daemon and cleans up resources.
+ *
+ * Releases dynamically allocated memory, closes open sockets, and performs
+ * any other necessary cleanup tasks before the daemon exits.
+ */
+void ospf_shutdown();
 
-/* ospf_lsa.c */
-#include "ospf_lsa.h"
-#include <stdio.h>
-
-void ospf_lsa_process()
-{
-    printf("Processing OSPF LSA...\n");
-    // TODO: Implement LSA processing logic
-}
-
-/* ospf_neighbor.c */
-#include "ospf_neighbor.h"
-#include <stdio.h>
-
-void ospf_neighbor_discover()
-{
-    printf("Discovering OSPF Neighbors...\n");
-    // TODO: Implement OSPF neighbor discovery
-}
-
-/* ospf_area.c */
-#include "ospf_area.h"
-#include <stdio.h>
-
-void ospf_area_init()
-{
-    printf("Initializing OSPF Area...\n");
-    // TODO: Implement OSPF area initialization
-}
-
-/* ospf_flood.c */
-#include "ospf_flood.h"
-#include <stdio.h>
-
-void ospf_flood()
-{
-    printf("Flooding OSPF LSA...\n");
-    // TODO: Implement OSPF LSA flooding logic
-}
-
-/* ospf_utils.c */
-#include "ospf_utils.h"
-#include <stdio.h>
-
-void ospf_log_debug(const char *message)
-{
-    printf("DEBUG: %s\n", message);
-}
+#endif // OSPF_MAIN_H

@@ -4,6 +4,8 @@
         "ospf_packet.h": "c",
         "inet.h": "c",
         "ospf_lsa.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "ospf_network.h": "c",
+        "log.h": "c"
     }
 }

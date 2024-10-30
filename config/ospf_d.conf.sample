@@ -1,1 +1,18 @@
-# TODO: 提供 ospf_d 的示例配置文件
+# OSPF Configuration File
+
+# Define the OSPF area ID (in decimal)
+area_id 0
+
+# Interface configuration for OSPF
+interface eth0
+
+# Authentication key for OSPF
+authentication_key my_ospf_auth_key
+
+# Hello interval in seconds
+hello_interval 10
+
+# Dead interval in seconds
+dead_interval 40
+
+# Additional parameters can be added as needed
